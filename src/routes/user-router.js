@@ -1,6 +1,18 @@
 const express = require("express");
+const User = require("../models/user"); // Assuming you have a User model defined
+
+const { registerHandler } = require("../handlers/User/register-handler");
 
 const router = express.Router();
+
+// Route to register
+router.post("/users/register", registerHandler);
+
+// Route to login
+router.post("/users/login", (req, res) => {
+  // Logic to login user
+  res.send("Login user");
+});
 
 // Middleware to check permissions
 function checkPermissions(permissions) {
@@ -42,17 +54,4 @@ router.delete(
     res.send("Delete user");
   }
 );
-
-// Route to login
-router.post("/users/login", (req, res) => {
-  // Logic to login user
-  res.send("Login user");
-});
-
-// Route to register
-router.post("/users/register", (req, res) => {
-  // Logic to register user
-  res.send("Register user");
-});
-
 module.exports = router;
