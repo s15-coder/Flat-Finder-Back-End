@@ -1,5 +1,5 @@
 const express = require("express");
-const User = require("../models/user"); // Assuming you have a User model defined
+const User = require("../models/User.js"); // Assuming you have a User model defined
 
 const { registerHandler } = require("../handlers/User/register-handler");
 

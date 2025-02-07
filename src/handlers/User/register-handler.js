@@ -1,3 +1,5 @@
+import User from "../../models/User.js";
+
 export const registerHandler = async (req, res) => {
   try {
     const { email, ...otherFields } = req.body;
