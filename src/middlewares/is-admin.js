@@ -1,7 +1,6 @@
 const { getUserById } = require("../utils/get-user-by-id.js");
 const jwt = require("jsonwebtoken");
 module.exports.checkIsAdmin = async (req, res, next) => {
-  console.log(req.headers.token);
   const token = req.headers.token;
   if (!token) {
     return res.status(403).json({ message: "Invalid token" });

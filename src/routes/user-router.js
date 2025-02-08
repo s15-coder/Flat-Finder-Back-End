@@ -1,10 +1,12 @@
 const express = require("express");
-const User = require("../models/User.js");
 
 // Handlers
 const { registerHandler } = require("../handlers/User/register-handler");
 const { loginHandler } = require("../handlers/User/login-handler");
 const { getUsersHandler } = require("../handlers/User/get-users-handler");
+const {
+  getUserByIdHandler,
+} = require("../handlers/User/get-user-by-id-handler");
 
 // Middlewares
 const { checkIsAdmin } = require("../middlewares/is-admin.js");
@@ -21,10 +23,7 @@ router.post("/users/login", loginHandler);
 router.get("/users", checkIsAdmin, getUsersHandler);
 
 // Route to get user by ID
-router.get("/users/:id", (req, res) => {
-  // Logic to get user by ID
-  res.send(`Get user with ID ${req.params.id}`);
-});
+router.get("/users/:id", checkIsAdmin, getUserByIdHandler);
 
 // Route to update user
 router.patch(
