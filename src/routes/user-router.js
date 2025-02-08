@@ -1,7 +1,13 @@
 const express = require("express");
-const User = require("../models/User.js"); // Assuming you have a User model defined
+const User = require("../models/User.js");
 
+// Handlers
 const { registerHandler } = require("../handlers/User/register-handler");
+const { loginHandler } = require("../handlers/User/login-handler");
+const { getUsersHandler } = require("../handlers/User/get-users-handler");
+
+// Middlewares
+const { checkIsAdmin } = require("../middlewares/is-admin.js");
 
 const router = express.Router();
 
@@ -9,25 +15,10 @@ const router = express.Router();
 router.post("/users/register", registerHandler);
 
 // Route to login
-router.post("/users/login", (req, res) => {
-  // Logic to login user
-  res.send("Login user");
-});
+router.post("/users/login", loginHandler);
 
-// Middleware to check permissions
-function checkPermissions(permissions) {
-  return (req, res, next) => {
-    // Logic to check user permissions
-    // For now, just call next()
-    next();
-  };
-}
-
-// Route to get all users
-router.get("/users", checkPermissions(["admin"]), (req, res) => {
-  // Logic to get all users
-  res.send("Get all users");
-});
+// Route to get x users
+router.get("/users", checkIsAdmin, getUsersHandler);
 
 // Route to get user by ID
 router.get("/users/:id", (req, res) => {
@@ -38,7 +29,7 @@ router.get("/users/:id", (req, res) => {
 // Route to update user
 router.patch(
   "/users",
-  checkPermissions(["admin", "account owner"]),
+  // checkPermissions(["admin", "account owner"]),
   (req, res) => {
     // Logic to update user
     res.send("Update user");
@@ -48,7 +39,7 @@ router.patch(
 // Route to delete user
 router.delete(
   "/users",
-  checkPermissions(["admin", "account owner"]),
+  // checkPermissions(["admin", "account owner"]),
   (req, res) => {
     // Logic to delete user
     res.send("Delete user");
