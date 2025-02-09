@@ -10,6 +10,10 @@ const {
 
 // Middlewares
 const { checkIsAdmin } = require("../middlewares/is-admin.js");
+const { isValidToken } = require("../middlewares/is-valid-token.js");
+const {
+  updateUserHandler,
+} = require("../handlers/User/update-user-handler.js");
 
 const router = express.Router();
 
@@ -26,14 +30,7 @@ router.get("/users", checkIsAdmin, getUsersHandler);
 router.get("/users/:id", checkIsAdmin, getUserByIdHandler);
 
 // Route to update user
-router.patch(
-  "/users",
-  // checkPermissions(["admin", "account owner"]),
-  (req, res) => {
-    // Logic to update user
-    res.send("Update user");
-  }
-);
+router.patch("/users/:id", isValidToken, updateUserHandler);
 
 // Route to delete user
 router.delete(
