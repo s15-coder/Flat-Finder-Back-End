@@ -14,3 +14,11 @@ Flat Finder is a Node.js project developed for college. This backend service is 
 1. Download the project.
 2. Execute `npm install` to install all the required dependencies.
 3. Run the command `nodemon src/server.js` to start the server.
+   /\*\*
+
+## API Documentation
+
+To get do the documentation of the API and its different endpoints:
+
+- @see {@link https://documenter.getpostman.com/view/10799279/2sAYX9nzxx|API Documentation}
+  \*/
