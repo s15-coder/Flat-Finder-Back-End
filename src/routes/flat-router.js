@@ -1,17 +1,15 @@
 const express = require("express");
 const { addFlatHandler } = require("../handlers/Flat/add-flat-handler");
 const { isValidToken } = require("../middlewares/is-valid-token");
+const { getAllFlatsHandler } = require("../handlers/Flat/get-flats-handler");
 
 const router = express.Router();
 
 // Route to add a new flat
 router.post("/flats", isValidToken, addFlatHandler);
 
-// // Route to get all flats
-// router.get("/flats", (req, res) => {
-//   // Implement your logic to get all flats
-//   res.send("Get all flats");
-// });
+// Route to get all flats
+router.get("/flats", isValidToken, getAllFlatsHandler);
 
 // // Route to update a flat
 // router.patch("/flats", checkPermissions("flat owner"), (req, res) => {

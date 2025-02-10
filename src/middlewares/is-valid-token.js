@@ -8,6 +8,7 @@ module.exports.isValidToken = async (req, res, next) => {
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     req.body.authenticatedUserId = payload.id;
+    req.body.isAdmin = payload.isAdmin;
     next();
   } catch (error) {
     console.log("Unauthorized access:", error);
