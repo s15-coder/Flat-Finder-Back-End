@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-module.exports.isValidToken = async (req, res, next) => {
+const isValidToken = async (req, res, next) => {
   const token = req.headers.token;
   if (!token) {
     return res.status(403).json({ message: "Invalid token" });
@@ -15,3 +15,5 @@ module.exports.isValidToken = async (req, res, next) => {
     return res.status(403).json({ message: "Unauthorized access" });
   }
 };
+
+module.exports = { isValidToken };
