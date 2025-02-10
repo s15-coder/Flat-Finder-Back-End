@@ -14,6 +14,9 @@ const { isValidToken } = require("../middlewares/is-valid-token.js");
 const {
   updateUserHandler,
 } = require("../handlers/User/update-user-handler.js");
+const {
+  deleteUserHandler,
+} = require("../handlers/User/delete-user-handler.js");
 
 const router = express.Router();
 
@@ -32,13 +35,6 @@ router.get("/users/:id", checkIsAdmin, getUserByIdHandler);
 // Route to update user
 router.patch("/users/:id", isValidToken, updateUserHandler);
 
-// Route to delete user
-router.delete(
-  "/users",
-  // checkPermissions(["admin", "account owner"]),
-  (req, res) => {
-    // Logic to delete user
-    res.send("Delete user");
-  }
-);
+router.delete("/users/:id", isValidToken, deleteUserHandler);
+
 module.exports = router;
