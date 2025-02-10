@@ -5,6 +5,8 @@ const { getAllFlatsHandler } = require("../handlers/Flat/get-flats-handler");
 const {
   getFlatByIdHandler,
 } = require("../handlers/Flat/get-flat-by-id-handler");
+const { updateFlatHandler } = require("../handlers/Flat/update-flat-handler");
+const { deleteFlatHandler } = require("../handlers/Flat/delete-flat-handler");
 
 const router = express.Router();
 
@@ -17,16 +19,10 @@ router.get("/flats", isValidToken, getAllFlatsHandler);
 // Route to get a flat by ID
 router.get("/flats/:id", isValidToken, getFlatByIdHandler);
 
-// // Route to update a flat
-// router.patch("/flats", checkPermissions("flat owner"), (req, res) => {
-//   // Implement your logic to update a flat
-//   res.send("Update flat");
-// });
+// Route to update a flat
+router.patch("/flats/:id", isValidToken, updateFlatHandler);
 
-// // Route to delete a flat
-// router.delete("/flats", checkPermissions("flat owner"), (req, res) => {
-//   // Implement your logic to delete a flat
-//   res.send("Delete flat");
-// });
+// Route to delete a flat
+router.delete("/flats/:id", isValidToken, deleteFlatHandler);
 
 module.exports = router;
