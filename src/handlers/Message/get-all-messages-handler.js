@@ -1,5 +1,12 @@
+const Message = require("../../models/Message");
 const getAllMessagesHandler = async (req, res) => {
-  return res.json({ message: "Get all messages for the flat" });
+  const { id } = req.params;
+  const messages = await Message.find({
+    flatId: id,
+    ownerId: req.body.authenticatedUserId,
+  });
+
+  return res.json({ messages });
 };
 
 module.exports = { getAllMessagesHandler };
