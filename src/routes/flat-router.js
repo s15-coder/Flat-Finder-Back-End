@@ -2,7 +2,9 @@ const express = require("express");
 const { addFlatHandler } = require("../handlers/Flat/add-flat-handler");
 const { isValidToken } = require("../middlewares/is-valid-token");
 const { getAllFlatsHandler } = require("../handlers/Flat/get-flats-handler");
-const { getFlatById } = require("../handlers/Flat/get-flat-by-id");
+const {
+  getFlatByIdHandler,
+} = require("../handlers/Flat/get-flat-by-id-handler");
 
 const router = express.Router();
 
@@ -13,7 +15,7 @@ router.post("/flats", isValidToken, addFlatHandler);
 router.get("/flats", isValidToken, getAllFlatsHandler);
 
 // Route to get a flat by ID
-router.get("/flats/:id", isValidToken, getFlatById);
+router.get("/flats/:id", isValidToken, getFlatByIdHandler);
 
 // // Route to update a flat
 // router.patch("/flats", checkPermissions("flat owner"), (req, res) => {

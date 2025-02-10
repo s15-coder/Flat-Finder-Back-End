@@ -1,6 +1,6 @@
 const Flat = require("../../models/Flat.js");
 
-const getFlatById = async (req, res) => {
+const getFlatByIdHandler = async (req, res) => {
   const { id } = req.params;
   const { isAdmin, authenticatedUserId } = req.body;
   try {
@@ -19,4 +19,4 @@ const getFlatById = async (req, res) => {
   }
 };
 
-module.exports = { getFlatById };
+module.exports = { getFlatByIdHandler };
